@@ -40,7 +40,7 @@ Protection against network and application layer attacks is provided by CloudFro
 13. Clean up resources.
 
 
-# Details - Step 1:<a name="Step1"></a>  
+# Step 1:<a name="Step1"></a>  
 Deploy static S3 website using the CloudFormation template [here](https://github.com/veeCan54/03-CloudFrontS3SecureWebsiteHosting/blob/main/files/S3Website.yaml).  
 # Step 2:<a name="Step2"></a> 
 After the Stack has been created, copy the static website url from CloudFormation Outputs section.  
@@ -71,7 +71,7 @@ Copy the URL of the distribution.
 Load the url on a browser and notice the padlock on the URL. Observe the default SSL certificate provided by cloudfront.
 ![Alt text](https://github.com/veeCan54/03-CloudFrontS3SecureWebsiteHosting/blob/main/images/03DistributionWithCert.png) 
 # Step 5:<a name="Step5"></a>   
-Inspect the Route 53 public hosted zone. In the public zone we only have the NS and SOA records.
+Inspect the Route 53 public hosted zone. In the public zone we only have the NS and SOA records.  
 To add a custom DNS name to the distribution, edit the distribution.
 ![Alt text](https://github.com/veeCan54/03-CloudFrontS3SecureWebsiteHosting/blob/main/images/05UpdateDNSName.png) 
 
