@@ -40,7 +40,7 @@ It does that by using caching and by using a global delivery network of edge loc
 # Steps:
 1. Deploy static website using the cloud formation template. [Details](#Step1) 
 2. Test the S3 website. Notice that if the protocol in the url is modified to https, it will keep spinning and will not load. [Details](#Step2)   
-3. <a name="Step3Back"></a>Create a new CloudFront distribution using the S3 website as Origin. [Details](#Step3)  
+3. Create a new CloudFront distribution using the S3 website as Origin. [Details](#Step3)  
 4. Load the distribution endpoint on a browser, notice the padlock which indicates it is using https, view the certificate. [Details](#Step4)  
 5. Modify the distribution by adding a custom DNS name. For this step and subsequent steps we need a public hosted zone in Route 53. [Details](#Step5)  
 6. Request a custom SSL certificate using ACM and attach it to the CloudFront distribution. [Details](#Step6)  
@@ -48,14 +48,13 @@ It does that by using caching and by using a global delivery network of edge loc
 8. Load the custom domain name on a browser, notice the padlock and view the name on the certificate matching the custom domain name. [Details](#Step8)  
 9. Modify the distribution by restricting public access. [Details](#Step9) 
 10. Update bucket policy so that only the CloudFront distribution can access the bucket.  [Details](#Step10) 
-11. Explore the new bucket policy and understand what it means. [Details](#Step11) 
+11. Let's understand what the bucket policy means. [Details](#Step11) 
 12. Load the S3 static website URL on a browser and notice the 403 HTTP Status code. It can only be accessed by the CloudFront distribution. [Details](#Step12) 
 13. Clean up resources.
 
 
 # Step 1:<a name="Step1"></a>  
-Deploy static S3 website using the CloudFormation template [here](https://github.com/veeCan54/03-CloudFrontS3SecureWebsiteHosting/blob/main/files/S3Website.yaml).  
-[Back to Summary](#Step1Back) 
+Deploy static S3 website using the CloudFormation template [here](https://github.com/veeCan54/03-CloudFrontS3SecureWebsiteHosting/blob/main/files/S3Website.yaml).   
 # Step 2:<a name="Step2"></a> 
 After the Stack has been created, copy the static website url from CloudFormation Outputs section.  
 Load it in a browser window to make sure it is working.  
@@ -65,7 +64,6 @@ Notice that it is unsecure.
 If we try https, it will not load - it will simply spin.
 ![Alt text](https://github.com/veeCan54/03-CloudFrontS3SecureWebsiteHosting/blob/main/images/01UnsecureStaticWebsiteWillNotLoad.png)
 We are going to change this.  
-[Back to Summary](#Step2Back)
 # Step 3:<a name="Step3"></a>  
 On the AWS Admin console, go to CloudFormation, click on Create New Distribution.  
 Select the Static S3 website endpoint from the drop down as the origin.  
@@ -79,7 +77,6 @@ There is no need for an SSL certificate because CloudFront will assign a default
 Click on Create Distribution.  
 ![Alt text](https://github.com/veeCan54/03-CloudFrontS3SecureWebsiteHosting/blob/main/images/03DistributionDeploying.png) 
 Wait until the distribution is created and has completed deployment.  
-[Back to Summary](#Step3Back)
 # Step 4:<a name="Step4"></a> 
 Copy the URL of the distribution.  
 ![Alt text](https://github.com/veeCan54/03-CloudFrontS3SecureWebsiteHosting/blob/main/images/03DistributionCreated0.png) 
@@ -91,14 +88,12 @@ To add a custom DNS name to the distribution, edit the distribution.
 ![Alt text](https://github.com/veeCan54/03-CloudFrontS3SecureWebsiteHosting/blob/main/images/05UpdateDNSName.png) 
 
 # Step 6:<a name="Step6"></a>  
-Enter the chosen DNS name.  
-Click on Request certificate.   
+Enter the chosen DNS name. Click on Request certificate.   
 ![Alt text](https://github.com/veeCan54/03-CloudFrontS3SecureWebsiteHosting/blob/main/images/05UpdateDNSName1.png) 
-
 In the Certificate Manager screen enter the fully qualified domain name. Make sure DNS validation is selected.  
 ![Alt text](https://github.com/veeCan54/03-CloudFrontS3SecureWebsiteHosting/blob/main/images/05RequestCert1.png)
 ![Alt text](https://github.com/veeCan54/03-CloudFrontS3SecureWebsiteHosting/blob/main/images/05RequestCert2.png)
-Click on Create records in Route 53
+Click on Create records in Route 53.
 ![Alt text](https://github.com/veeCan54/03-CloudFrontS3SecureWebsiteHosting/blob/main/images/05RequestCert3.png)
 Route 53 will create a new CNAME record in our public hosted zone. This is how Route 53 validates that we own the domain. 
 ![Alt text](https://github.com/veeCan54/03-CloudFrontS3SecureWebsiteHosting/blob/main/images/05CreateR53Records.png)
@@ -129,23 +124,18 @@ Now the control setting that was just created appears on the drop down.
 We need to now modify the Bucket policy on our S3 bucket so that only CloudFront can access it.  
 ![Alt text](https://github.com/veeCan54/03-CloudFrontS3SecureWebsiteHosting/blob/main/images/08OACSetting3.png)
 # Step 10:<a name="Step10"></a>  
-In S3, paste the copied bucket policy.
+In S3, paste the copied bucket policy. Save the policy.
 ![Alt text](https://github.com/veeCan54/03-CloudFrontS3SecureWebsiteHosting/blob/main/images/08OACSettingNewBucketPolicy.png)
-
 # Step 11:<a name="Step11"></a>  
 Understand what the policy means.  
-A GetObject operation is allowed on our bucket by the CloudFront service, as long as the source arn of the distribution matches ours.  
-Save the policy.
-![Alt text](https://github.com/veeCan54/03-CloudFrontS3SecureWebsiteHosting/blob/main/images/08OACSettingNewBucketPolicySaved.png)
+> A GetObject operation is allowed on our bucket by the CloudFront service, as long as the source arn of the distribution matches ours.  
 # Step 12:<a name="Step12"></a>  
 After setting up Origin Access Control, if we try our original S3 website URL we see that it can't be accessed. 
 ![Alt text](https://github.com/veeCan54/03-CloudFrontS3SecureWebsiteHosting/blob/main/images/09OACInEffect.png)  
 It can only be accessed using CloudFront.
-
 ![Alt text](https://github.com/veeCan54/03-CloudFrontS3SecureWebsiteHosting/blob/main/images/09OACInEffect1.png)
 # Step 13:<a name="Step13"></a>  
-Clean up resources.  
-Delete the bucket, delete the Distribution. delete the Record in Route 53. 
+Clean up resources. Delete the bucket, delete the Distribution. delete the Record in Route 53. 
 
 
 
