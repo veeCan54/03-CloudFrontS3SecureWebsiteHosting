@@ -38,9 +38,9 @@ It does that by using caching and by using a global delivery network of edge loc
 > **Note:** The focus of this exercise is to host a secure static S3 website, configure a custom domain name and to restrict access to the content to CloudFront. Lamda@Edge will be the focus of a future hands on exercise. 
 
 # Steps:
-1. Deploy static website using the cloud formation template.<a name="Step1Back"></a> [Details](#Step1) 
-2. Test the S3 website. Notice that if the protocol in the url is modified to https, it will keep spinning and will not load. <a name="Step2Back"></a>[Details](#Step2)   
-3. Create a new CloudFront distribution using the S3 website as Origin.<a name="Step3Back"></a>[Details](#Step3)  
+1. <a name="Step1Back">Deploy static website using the cloud formation template.</a> [Details](#Step1) 
+2. <a name="Step2Back">Test the S3 website. Notice that if the protocol in the url is modified to https, it will keep spinning and will not load.</a>[Details](#Step2)   
+3. <a name="Step3Back">Create a new CloudFront distribution using the S3 website as Origin.</a>[Details](#Step3)  
 4. Load the distribution endpoint on a browser, notice the padlock which indicates it is using https, view the certificate. [Details](#Step4)  
 5. Modify the distribution by adding a custom DNS name. For this step and subsequent steps we need a public hosted zone in Route 53. [Details](#Step5)  
 6. Request a custom SSL certificate using ACM and attach it to the CloudFront distribution. [Details](#Step6)  
