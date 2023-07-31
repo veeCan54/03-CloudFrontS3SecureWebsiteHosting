@@ -105,7 +105,7 @@ In  Route 53 create an A record pointing the custom domain name to the CloudFron
 ![Alt text](https://github.com/veeCan54/03-CloudFrontS3SecureWebsiteHosting/blob/main/images/07Route53ARecord01.png)
 ![Alt text](https://github.com/veeCan54/03-CloudFrontS3SecureWebsiteHosting/blob/main/images/07Route53ARecord1.png)
 # Step 8:<a name="Step8"></a> 
-Load the custom DNS name. Inspect the padlock and Observe the custom SSL cert we created.
+Load the custom DNS name. Inspect the padlock and observe the custom SSL cert we created.
 ![Alt text](https://github.com/veeCan54/03-CloudFrontS3SecureWebsiteHosting/blob/main/images/07SecureSiteDeployed.png)
 # Step 9:<a name="Step9"></a>  
 Now we need to restrict access to the S3 site so that only CloudFront can access it. This ensures security of our application.
@@ -113,14 +113,13 @@ In the distribution, click on Origin. Select the origin and click on Edit.
 Now we are going to modify the  Origin access.  
 From Public, change it to Origin access control settings (recommended) 
 ![Alt text](https://github.com/veeCan54/03-CloudFrontS3SecureWebsiteHosting/blob/main/images/08OACSetting1.png)
-Click on Create Origin Access Setting and then Create control setting.  
-Keep the defaults and click on Create.
+Click on Create Origin Access Setting and then Create control setting. Keep the defaults and click on Create.
 ![Alt text](https://github.com/veeCan54/03-CloudFrontS3SecureWebsiteHosting/blob/main/images/08ACCreateControlSetting.png)
 Now the control setting that was just created appears on the drop down.  
 We need to now modify the Bucket policy on our S3 bucket so that only CloudFront can access it.  
 ![Alt text](https://github.com/veeCan54/03-CloudFrontS3SecureWebsiteHosting/blob/main/images/08OACSetting3.png)
 # Step 10:<a name="Step10"></a>  
-In S3, paste the copied bucket policy. Save the policy.
+In S3, paste the copied bucket policy. Make sure the bucket name and distribution name matches ours. If not, edit it. Save the policy.
 ![Alt text](https://github.com/veeCan54/03-CloudFrontS3SecureWebsiteHosting/blob/main/images/08OACSettingNewBucketPolicy.png)
 # Step 11:<a name="Step11"></a>  
 Understand what the policy means.  
@@ -128,11 +127,7 @@ Understand what the policy means.
 # Step 12:<a name="Step12"></a>  
 After setting up Origin Access Control, if we try our original S3 website URL we see that it can't be accessed. 
 ![Alt text](https://github.com/veeCan54/03-CloudFrontS3SecureWebsiteHosting/blob/main/images/09OACInEffect.png)  
-It can only be accessed using CloudFront.
+It can only be accessed using CloudFront. This means that we have prevented unauthorized access to our content.
 ![Alt text](https://github.com/veeCan54/03-CloudFrontS3SecureWebsiteHosting/blob/main/images/09OACInEffect1.png)
 # Step 13:<a name="Step13"></a>  
 Clean up resources. Delete the bucket, delete the Distribution. delete the Record in Route 53. 
-
-
-
-
