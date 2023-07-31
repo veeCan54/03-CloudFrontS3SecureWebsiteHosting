@@ -1,4 +1,4 @@
-# 03-CloudFrontS3SecureWebsiteHosting
+# CloudFront S3 Secure Website Hosting
 # Objectives:
 1. CDNs are not cheap. Explore primary design considerations to determine if a CDN is needed for the system we are designing. 
 2. Explore CloudFront features.
@@ -10,18 +10,31 @@
 1. Does the system have user presence across the globe?
 2. What type of delivery is needed for the workflow?  Only dynamic? Only static, or a combination of both?
 3. What are the approximate sizes of objects delivered?
-4. Is any object transformation needed ?
-5. What are the security and access considerations?  
-These would be some primary design considerations, however there could be many more.  
-If our requirements justify the need for a CDN, then AWS CloudFront is a possible solution. 
+4. Is any object transformation needed?
+5. What are the security and access considerations for the content being served?  
+<p>These are some primary design considerations, however there could be many more.  
+<strong>If our requirements justify the need for a CDN, then AWS CloudFront is a possible solution.</strong>
 
-# CloudFront Features:
-1. CloudFront is a content delivery network that gives businesses and web application developers an easy and cost effective way to distribute content with low latency and high data transfer speeds. It is a pay-per-use offering, requiring no long term commitments or minimum fees. With CloudFront, files are delivered to end-users using a global network of edge locations. Content is cached in these edge locations until their TTL expires or until a new origin fetch is done as a result of a new deployment or a cache invalidation.  
-2. APIs or applications can be delivered over HTTPS using the latest version of TLS to encrypt and secure communication between the viewers and CloudFront. AWS Certificate Manager (ACM) can be used to create a custom SSL certificate and deploy to an CloudFront distribution for free. 
-Protection against network and application layer attacks is provided by CloudFront by seamlessly integrating with AWS Shield, AWS Web Application Firewall (WAF), and Amazon Route 53. This creates a flexible, layered security perimeter against multiple types of attacks including network and application layer DDoS attacks.  
-3. Access to content can be restricted using a number of mechanisms like Signed URLs and Signed Cookies. It is possible to restrict access to only authenticated viewers using Token Authentication. Users in certain geographic regions can be restricted access to content through CloudFront's geo-restriction capability. Securing an S3 website origin, making it only accessible from CloudFront is possible using using Origin Access Identity, now referred to as Origin Access Control.  
-4. CloudFront infrastructure and processes are compliant with industry standards like PCI-DSS Level 1, HIPAA, and ISO 9001 FEDRAMP etc. 
-5. Lambda@Edge makes it possible to run Node.js and Python Lambda functions to customize content that CloudFront delivers. Here the functions are executed closer to the viewer, in response to CloudFront events without the need for provisioning or managing servers. 
+# CloudFront Overview:  
+CloudFront is a content delivery network. It's job is to improve the delivery of that content from it's original location to the viewers of that data.
+It does that by using caching and by using a global delivery network of edge locations. Content is cached in these edge locations until their TTL expires or until a new origin fetch is done as a result of a new deployment or a cache invalidation.  
+
+**Key components:**
+<ol> <li> <strong>Origin</strong> is where the original, definitive version of our content is stored. It can be S3 or a custom origin like a webserver that has a publicly routable IPV2 IP address. You could have one or more origins for a CloudFront distribution, upto 25 currently.</li>
+<li> <strong>Distribution</strong> is the configurable unit of CloudFront. To use CloudFront, we create a distribution and this gets deployed to the network. </li>
+<li> <strong>Edge location</strong> is where our information is cached. Edge locations are part of CloudFront's global network and are located in major AWS Regions and major country and state capitals. Edge locations are closer to our end users. </li>
+<li> <strong>Regional Edge Cache</strong> provides another layer of caching. They are much bigger than Edge locations and are fewer in number. They are used to cache large amounts of less frequently accessed data, in larger more global CloudFornt deployments. </li>
+<li> <strong>Cache behavior settings</strong> allow us to configure CloudFront functionality based on our application needs. A distribution comes with a default cache behavior, we can create additional cache behaviors that define how CloudFront responds when it receives a request for objects that match for e.g a particular path pattern. </li> </ol>  
+
+# Features and integrations:
+<ol> <li> APIs or applications can be delivered over HTTPS using the latest version of TLS to encrypt and secure communication between the viewers and CloudFront. AWS Certificate Manager (ACM) can be used to create a custom SSL certificate and deploy to an CloudFront distribution for free. </li>
+<li>Protection against network and application layer attacks is provided by CloudFront by seamlessly integrating with AWS Shield, AWS Web Application Firewall (WAF), and Amazon Route 53. This creates a flexible, layered security perimeter against multiple types of attacks including network and application layer DDoS attacks. </li>
+<li>Access to content can be restricted using a number of mechanisms like Signed URLs and Signed Cookies. It is possible to restrict access to only authenticated viewers using Token Authentication. Users in certain geographic regions can be restricted access to content through CloudFront's geo-restriction capability. Securing an S3 website origin, making it only accessible from CloudFront is possible using using Origin Access Identity, now referred to as Origin Access Control. </li>
+<li>CloudFront infrastructure and processes are compliant with industry standards like PCI-DSS Level 1, HIPAA, and ISO 9001 FEDRAMP etc. </li>
+<li>CloudFront is a pay-per-use offering, requiring no long term commitments or minimum fees. After the free tier, cost varies depending on the amout of data transfered to the internet and to the origin per GB. </li>
+<li>Lambda@Edge makes it possible to run Node.js and Python Lambda functions to customize content that CloudFront delivers. Here the functions are executed closer to the viewer, in response to CloudFront events without the need for provisioning or managing servers. </li>
+</ol>  
+
 > **Note:** The focus of this exercise is to host a secure static S3 website, configure a custom domain name and to restrict access to the content to CloudFront. Lamda@Edge will be the focus of a future hands on exercise. 
 
 # Steps:
