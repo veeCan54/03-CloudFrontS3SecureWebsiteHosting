@@ -38,9 +38,9 @@ It does that by using caching and by using a global delivery network of edge loc
 > **Note:** The focus of this exercise is to host a secure static S3 website, configure a custom domain name and to restrict access to the content to CloudFront. Lamda@Edge will be the focus of a future hands on exercise. 
 
 # Steps:
-1. Deploy static website using the cloud formation template. [Details](#Step1)  
-2. Test the S3 website. Notice that if the protocol in the url is modified to https, it will keep spinning and will not load. [Details](#Step2)   
-3. Create a new CloudFront distribution using the S3 website as Origin. [Details](#Step3)  
+1. Deploy static website using the cloud formation template.<a name="Step1Back"></a> [Details](#Step1) 
+2. Test the S3 website. Notice that if the protocol in the url is modified to https, it will keep spinning and will not load. <a name="Step2Back"></a>[Details](#Step2)   
+3. Create a new CloudFront distribution using the S3 website as Origin.<a name="Step3Back"></a>[Details](#Step3)  
 4. Load the distribution endpoint on a browser, notice the padlock which indicates it is using https, view the certificate. [Details](#Step4)  
 5. Modify the distribution by adding a custom DNS name. For this step and subsequent steps we need a public hosted zone in Route 53. [Details](#Step5)  
 6. Request a custom SSL certificate using ACM and attach it to the CloudFront distribution. [Details](#Step6)  
@@ -54,7 +54,7 @@ It does that by using caching and by using a global delivery network of edge loc
 
 
 # Step 1:<a name="Step1"></a>  
-Deploy static S3 website using the CloudFormation template [here](https://github.com/veeCan54/03-CloudFrontS3SecureWebsiteHosting/blob/main/files/S3Website.yaml).  
+Deploy static S3 website using the CloudFormation template [here](https://github.com/veeCan54/03-CloudFrontS3SecureWebsiteHosting/blob/main/files/S3Website.yaml).<p style='text-align: right;'> [Back to Summary](#Step1Back) </p> 
 # Step 2:<a name="Step2"></a> 
 After the Stack has been created, copy the static website url from CloudFormation Outputs section.  
 Load it in a browser window to make sure it is working.  
@@ -63,13 +63,12 @@ Notice that it is unsecure.
 ![Alt text](https://github.com/veeCan54/03-CloudFrontS3SecureWebsiteHosting/blob/main/images/01UnsecureStaticWebsite.png)
 If we try https, it will not load - it will simply spin.
 ![Alt text](https://github.com/veeCan54/03-CloudFrontS3SecureWebsiteHosting/blob/main/images/01UnsecureStaticWebsiteWillNotLoad.png)
-We are going to change this.  
-
+We are going to change this.<p style='text-align: right;'> [Back to Summary](#Step2Back) </p> 
 # Step 3:<a name="Step3"></a>  
 On the AWS Admin console, go to CloudFormation, click on Create New Distribution.  
 Select the Static S3 website endpoint from the drop down as the origin.  
 ![Alt text](https://github.com/veeCan54/03-CloudFrontS3SecureWebsiteHosting/blob/main/images/03Distribution1.png)  
-For Viewer protocol policy, select **HTTP & HTTPS** 
+For Viewer protocol policy, select **HTTP & HTTPS**  
 Restrict Viewer access -  **no**  
 Caching Policy as **CacheOptimized**  
 Under Security settings, select **Do not enable security protections.**  
@@ -77,7 +76,7 @@ There is no need for an SSL certificate because CloudFront will assign a default
 ![Alt text](https://github.com/veeCan54/03-CloudFrontS3SecureWebsiteHosting/blob/main/images/03Distribution4.png)  
 Click on Create Distribution.  
 ![Alt text](https://github.com/veeCan54/03-CloudFrontS3SecureWebsiteHosting/blob/main/images/03DistributionDeploying.png) 
-Wait until the distribution is created and has completed deployment. 
+Wait until the distribution is created and has completed deployment.<p style='text-align: right;'> [Back to Summary](#Step3Back) </p> 
 # Step 4:<a name="Step4"></a> 
 Copy the URL of the distribution.  
 ![Alt text](https://github.com/veeCan54/03-CloudFrontS3SecureWebsiteHosting/blob/main/images/03DistributionCreated0.png) 
