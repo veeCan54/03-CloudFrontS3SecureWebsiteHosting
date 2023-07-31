@@ -54,7 +54,8 @@ It does that by using caching and by using a global delivery network of edge loc
 
 
 # Step 1:<a name="Step1"></a>  
-Deploy static S3 website using the CloudFormation template [here](https://github.com/veeCan54/03-CloudFrontS3SecureWebsiteHosting/blob/main/files/S3Website.yaml).<p style='text-align: right;'> [Back to Summary](#Step1Back) </p> 
+Deploy static S3 website using the CloudFormation template [here](https://github.com/veeCan54/03-CloudFrontS3SecureWebsiteHosting/blob/main/files/S3Website.yaml).  
+[Back to Summary](#Step1Back) 
 # Step 2:<a name="Step2"></a> 
 After the Stack has been created, copy the static website url from CloudFormation Outputs section.  
 Load it in a browser window to make sure it is working.  
@@ -63,7 +64,8 @@ Notice that it is unsecure.
 ![Alt text](https://github.com/veeCan54/03-CloudFrontS3SecureWebsiteHosting/blob/main/images/01UnsecureStaticWebsite.png)
 If we try https, it will not load - it will simply spin.
 ![Alt text](https://github.com/veeCan54/03-CloudFrontS3SecureWebsiteHosting/blob/main/images/01UnsecureStaticWebsiteWillNotLoad.png)
-We are going to change this.<p style='text-align: right;'> [Back to Summary](#Step2Back) </p> 
+We are going to change this.  
+[Back to Summary](#Step2Back)
 # Step 3:<a name="Step3"></a>  
 On the AWS Admin console, go to CloudFormation, click on Create New Distribution.  
 Select the Static S3 website endpoint from the drop down as the origin.  
@@ -76,7 +78,8 @@ There is no need for an SSL certificate because CloudFront will assign a default
 ![Alt text](https://github.com/veeCan54/03-CloudFrontS3SecureWebsiteHosting/blob/main/images/03Distribution4.png)  
 Click on Create Distribution.  
 ![Alt text](https://github.com/veeCan54/03-CloudFrontS3SecureWebsiteHosting/blob/main/images/03DistributionDeploying.png) 
-Wait until the distribution is created and has completed deployment.<p style='text-align: right;'> [Back to Summary](#Step3Back) </p> 
+Wait until the distribution is created and has completed deployment.  
+[Back to Summary](#Step3Back)
 # Step 4:<a name="Step4"></a> 
 Copy the URL of the distribution.  
 ![Alt text](https://github.com/veeCan54/03-CloudFrontS3SecureWebsiteHosting/blob/main/images/03DistributionCreated0.png) 
