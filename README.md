@@ -20,7 +20,7 @@ CloudFront is a content delivery network. It's job is to improve the delivery of
 It does that by using caching and by using a global delivery network of edge locations. Content is cached in these edge locations until their TTL expires or until a new origin fetch is done as a result of a new deployment or a cache invalidation.  
 
 **Key components:**
-<ol> <li> <strong>Origin</strong> is where the original, definitive version of our content is stored. It can be S3 or a custom origin like a webserver that has a publicly routable IPV2 IP address. You could have one or more origins for a CloudFront distribution, upto 25 currently.</li>
+<ol> <li> <strong>Origin</strong> is where the original, definitive version of our content is stored. It can be S3 or a custom origin like a webserver that has a publicly routable IPV4 IP address. You could have one or more origins for a CloudFront distribution, upto 25 currently.</li>
 <li> <strong>Distribution</strong> is the configurable unit of CloudFront. To use CloudFront, we create a distribution and this gets deployed to the network. </li>
 <li> <strong>Edge location</strong> is where our information is cached. Edge locations are part of CloudFront's global network and are located in major AWS Regions and major country and state capitals. Edge locations are closer to our end users. </li>
 <li> <strong>Regional Edge Cache</strong> provides another layer of caching. They are much bigger than Edge locations and are fewer in number. They are used to cache large amounts of less frequently accessed data, in larger more global CloudFornt deployments. </li>
