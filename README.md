@@ -35,7 +35,10 @@ It does that by using caching and by using a global delivery network of edge loc
 <li>Lambda@Edge makes it possible to run Node.js and Python Lambda functions to customize content that CloudFront delivers. Here the functions are executed closer to the viewer, in response to CloudFront events without the need for provisioning or managing servers. </li>
 </ol>  
 
-> **Note:** The focus of this exercise is to host a secure static S3 website, configure a custom domain name and to restrict access to the content to CloudFront. Lamda@Edge will be the focus of a future hands on exercise. 
+> **Note:**
+> As a prerequisite for this hands-on we need a public hosted zone on Route 53.
+> The focus of this exercise is to host a secure static S3 website, configure a custom domain name and to restrict access to the content to CloudFront.
+> Lamda@Edge will be the focus of a future hands on exercise.
 
 # Steps:
 1. Deploy static website using the cloud formation template. [Details](#Step1) 
