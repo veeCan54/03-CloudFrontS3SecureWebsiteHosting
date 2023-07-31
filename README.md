@@ -51,8 +51,6 @@ It does that by using caching and by using a global delivery network of edge loc
 11. Let's understand what the bucket policy means. [Details](#Step11) 
 12. Load the S3 static website URL on a browser and notice the 403 HTTP Status code. It can only be accessed by the CloudFront distribution. [Details](#Step12) 
 13. Clean up resources.
-
-
 # Step 1:<a name="Step1"></a>  
 Deploy static S3 website using the CloudFormation template [here](https://github.com/veeCan54/03-CloudFrontS3SecureWebsiteHosting/blob/main/files/S3Website.yaml).   
 # Step 2:<a name="Step2"></a> 
@@ -86,7 +84,6 @@ Load the url on a browser and notice the padlock on the URL. Observe the default
 Inspect the Route 53 public hosted zone. In the public zone we only have the NS and SOA records.  
 To add a custom DNS name to the distribution, edit the distribution.
 ![Alt text](https://github.com/veeCan54/03-CloudFrontS3SecureWebsiteHosting/blob/main/images/05UpdateDNSName.png) 
-
 # Step 6:<a name="Step6"></a>  
 Enter the chosen DNS name. Click on Request certificate.   
 ![Alt text](https://github.com/veeCan54/03-CloudFrontS3SecureWebsiteHosting/blob/main/images/05UpdateDNSName1.png) 
@@ -105,12 +102,11 @@ Wait for the distribution to be updated and deployed. Notice that the custom DNS
 ![Alt text](https://github.com/veeCan54/03-CloudFrontS3SecureWebsiteHosting/blob/main/images/06DistroUpdated.png)
 # Step 7:<a name="Step7"></a> 
 In  Route 53 create an A record pointing the custom domain name to the CloudFront distribution. 
-![Alt text](https://github.com/veeCan54/03-CloudFrontS3SecureWebsiteHosting/blob/main/images/07Route53ARecord0.png)
+![Alt text](https://github.com/veeCan54/03-CloudFrontS3SecureWebsiteHosting/blob/main/images/07Route53ARecord01.png)
 ![Alt text](https://github.com/veeCan54/03-CloudFrontS3SecureWebsiteHosting/blob/main/images/07Route53ARecord1.png)
 # Step 8:<a name="Step8"></a> 
 Load the custom DNS name. Inspect the padlock and Observe the custom SSL cert we created.
 ![Alt text](https://github.com/veeCan54/03-CloudFrontS3SecureWebsiteHosting/blob/main/images/07SecureSiteDeployed.png)
-
 # Step 9:<a name="Step9"></a>  
 Now we need to restrict access to the S3 site so that only CloudFront can access it. This ensures security of our application.
 In the distribution, click on Origin. Select the origin and click on Edit.  
